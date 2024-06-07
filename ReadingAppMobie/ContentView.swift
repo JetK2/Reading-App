@@ -1,61 +1,43 @@
-//
-//  ContentView.swift
-//  ReadingAppMobie
-//
-//  Created by Jetha Kaur on 07/06/2024.
-//
+import SwiftUI
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @State private var isShowingFilePicker = false
+    @State private var selectedURL: URL?
+    @State private var currentPageIndex = 0
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        ZStack {
+            Color.black
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                Button(action: {
+                    isShowingFilePicker = true
+                }) {
+                    Text("Upload File")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(25)
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+                .padding()
+                .sheet(isPresented: $isShowingFilePicker) {
+                    FilePicker(selectedURL: $selectedURL)
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
-    }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+                if let selectedURL = selectedURL {
+                    PDFTextView(url: selectedURL, currentPageIndex: $currentPageIndex)
+                        .padding()
+                }
             }
+            .padding()
         }
     }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

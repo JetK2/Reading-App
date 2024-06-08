@@ -6,7 +6,7 @@ struct ContentView: View {
     @State private var isShowingFilePicker = false
     @State private var selectedURL: URL?
     @State private var currentPageIndex = 0
-    @State private var speechRate: Float = 1.0 // Speech rate
+    @State private var speechRate: Float = 0.25 // Speech rate
     @State private var isPlaying = false // State for play/pause button
     @State private var isShowingSettings = false // State for showing settings
     @State private var pageColor = Color.black

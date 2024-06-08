@@ -8,7 +8,7 @@ struct PDFTextView: View {
     @Binding var cardColor: Color
     @Binding var fontColor: Color
     @Binding var fontFamily: String
-    @State private var pairSentences: [(Int, [String])] = []
+    @State private var sentences: [String] = []
 
     init(url: URL, currentPageIndex: Binding<Int>, cardColor: Binding<Color>, fontColor: Binding<Color>, fontFamily: Binding<String>) {
         self.url = url
@@ -16,16 +16,17 @@ struct PDFTextView: View {
         self._cardColor = cardColor
         self._fontColor = fontColor
         self._fontFamily = fontFamily
-        self._pairSentences = State(initialValue: PDFTextProcessor.extractPairSentences(from: url))
+        self._sentences = State(initialValue: PDFTextProcessor.extractSentences(from: url))
     }
 
     var body: some View {
         ScrollViewReader { scrollView in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    ForEach(pairSentences, id: \.0) { index, sentencePair in
-                        CardView(sentences: sentencePair, currentIndex: index, cardColor: cardColor, fontColor: fontColor, fontFamily: fontFamily)
+                    ForEach(sentences.indices, id: \.self) { index in
+                        CardView(sentence: sentences[index], cardColor: cardColor, fontColor: fontColor, fontFamily: fontFamily)
                             .frame(width: UIScreen.main.bounds.width * 0.8)
+                            .id(index)
                     }
                 }
                 .padding(.horizontal)
@@ -40,22 +41,19 @@ struct PDFTextView: View {
 }
 
 struct CardView: View {
-    let sentences: [String]
-    let currentIndex: Int
+    let sentence: String
     let cardColor: Color
     let fontColor: Color
     let fontFamily: String
 
     var body: some View {
         VStack {
-            ForEach(sentences, id: \.self) { sentence in
-                Text(sentence)
-                    .font(.custom(fontFamily, size: 18))
-                    .padding()
-                    .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(fontColor)
-            }
+            Text(sentence)
+                .font(.custom(fontFamily, size: 18))
+                .padding()
+                .fixedSize(horizontal: false, vertical: true)
+                .multilineTextAlignment(.center)
+                .foregroundColor(fontColor)
         }
         .padding()
         .background(cardColor)
@@ -71,31 +69,35 @@ struct PDFTextView_Previews: PreviewProvider {
     }
 }
 
-class PDFTextProcessor {
-    static func extractPairSentences(from url: URL) -> [(Int, [String])] {
-        var pairSentences: [(Int, [String])] = []
-        var currentIndex = 0
-        
-        if let pdfDocument = PDFDocument(url: url) {
-            for i in 0..<pdfDocument.pageCount {
-                if let page = pdfDocument.page(at: i), let pageText = page.string {
-                    let sentences = pageText.components(separatedBy: ". ")
-                    var pair: [String] = []
-                    for sentence in sentences {
-                        pair.append(sentence)
-                        if pair.count == 2 {
-                            pairSentences.append((currentIndex, pair))
-                            pair = []
-                            currentIndex += 1
-                        }
-                    }
-                    if !pair.isEmpty {
-                        pairSentences.append((currentIndex, pair))
-                        currentIndex += 1
-                    }
-                }
+
+
+
+
+struct PDFTextProcessor {
+    static func extractSentences(from url: URL) -> [String] {
+        guard let pdfDocument = PDFDocument(url: url) else { return [] }
+        var text = ""
+        for i in 0..<pdfDocument.pageCount {
+            if let page = pdfDocument.page(at: i), let pageText = page.string {
+                text += pageText + "\n"
             }
         }
-        return pairSentences
+        
+        // Split the text into sections based on line breaks and keywords
+        let keywords = ["Abstract", "Introduction", "Chapter", "Conclusion", "References"]
+        var sentences = text.components(separatedBy: .newlines)
+                            .flatMap { $0.components(separatedBy: ". ") }
+                            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        
+        // Further split based on keywords
+        for keyword in keywords {
+            sentences = sentences.flatMap { $0.components(separatedBy: keyword) }
+        }
+
+        // Remove empty sentences
+        sentences = sentences.filter { !$0.isEmpty }
+
+        return sentences
     }
 }
+

@@ -15,11 +15,9 @@
 		E3DB5B242C13191F00B50FF8 /* ReadingAppMobieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB5B232C13191F00B50FF8 /* ReadingAppMobieTests.swift */; };
 		E3DB5B2E2C13191F00B50FF8 /* ReadingAppMobieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB5B2D2C13191F00B50FF8 /* ReadingAppMobieUITests.swift */; };
 		E3DB5B302C13191F00B50FF8 /* ReadingAppMobieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB5B2F2C13191F00B50FF8 /* ReadingAppMobieUITestsLaunchTests.swift */; };
-		E3DB5B412C13311500B50FF8 /* FilePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB5B402C13311500B50FF8 /* FilePreview.swift */; };
 		E3DB5B452C1333B900B50FF8 /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB5B442C1333B900B50FF8 /* FilePicker.swift */; };
 		E3DB5B472C13373A00B50FF8 /* PDFTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB5B462C13373A00B50FF8 /* PDFTextView.swift */; };
-		E3DB5B492C133D2700B50FF8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB5B482C133D2700B50FF8 /* CardView.swift */; };
-		E3DB5B4B2C133D4800B50FF8 /* PDFTextProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB5B4A2C133D4800B50FF8 /* PDFTextProcessor.swift */; };
+		E3DB5B4D2C13939C00B50FF8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB5B4C2C13939C00B50FF8 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,11 +49,9 @@
 		E3DB5B292C13191F00B50FF8 /* ReadingAppMobieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReadingAppMobieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DB5B2D2C13191F00B50FF8 /* ReadingAppMobieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingAppMobieUITests.swift; sourceTree = "<group>"; };
 		E3DB5B2F2C13191F00B50FF8 /* ReadingAppMobieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingAppMobieUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		E3DB5B402C13311500B50FF8 /* FilePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePreview.swift; sourceTree = "<group>"; };
 		E3DB5B442C1333B900B50FF8 /* FilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		E3DB5B462C13373A00B50FF8 /* PDFTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTextView.swift; sourceTree = "<group>"; };
-		E3DB5B482C133D2700B50FF8 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		E3DB5B4A2C133D4800B50FF8 /* PDFTextProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTextProcessor.swift; sourceTree = "<group>"; };
+		E3DB5B4C2C13939C00B50FF8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,12 +102,10 @@
 		E3DB5B0F2C13191C00B50FF8 /* ReadingAppMobie */ = {
 			isa = PBXGroup;
 			children = (
-				E3DB5B402C13311500B50FF8 /* FilePreview.swift */,
 				E3DB5B122C13191C00B50FF8 /* ContentView.swift */,
-				E3DB5B482C133D2700B50FF8 /* CardView.swift */,
 				E3DB5B442C1333B900B50FF8 /* FilePicker.swift */,
 				E3DB5B462C13373A00B50FF8 /* PDFTextView.swift */,
-				E3DB5B4A2C133D4800B50FF8 /* PDFTextProcessor.swift */,
+				E3DB5B4C2C13939C00B50FF8 /* SettingsView.swift */,
 				E3DB5B162C13191F00B50FF8 /* Assets.xcassets */,
 				E3DB5B142C13191C00B50FF8 /* Item.swift */,
 				E3DB5B102C13191C00B50FF8 /* ReadingAppMobieApp.swift */,
@@ -275,12 +269,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3DB5B4B2C133D4800B50FF8 /* PDFTextProcessor.swift in Sources */,
-				E3DB5B492C133D2700B50FF8 /* CardView.swift in Sources */,
 				E3DB5B132C13191C00B50FF8 /* ContentView.swift in Sources */,
-				E3DB5B412C13311500B50FF8 /* FilePreview.swift in Sources */,
 				E3DB5B452C1333B900B50FF8 /* FilePicker.swift in Sources */,
 				E3DB5B152C13191C00B50FF8 /* Item.swift in Sources */,
+				E3DB5B4D2C13939C00B50FF8 /* SettingsView.swift in Sources */,
 				E3DB5B472C13373A00B50FF8 /* PDFTextView.swift in Sources */,
 				E3DB5B112C13191C00B50FF8 /* ReadingAppMobieApp.swift in Sources */,
 			);

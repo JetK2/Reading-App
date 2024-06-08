@@ -1,7 +1,10 @@
+//Libraries
 import SwiftUI
 
 struct SettingsView: View {
-    @Binding var isPresented: Bool // Binding to dismiss the settings view
+    //To dismiss settings
+    @Binding var isPresented: Bool
+    //customisation components
     @Binding var pageColor: Color
     @Binding var fontColor: Color
     @Binding var cardColor: Color
@@ -11,12 +14,14 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             Form {
+                // Colour Pickers
                 Section(header: Text("Colors")) {
                     ColorPicker("Page Color", selection: $pageColor)
                     ColorPicker("Font Color", selection: $fontColor)
                     ColorPicker("Card Color", selection: $cardColor)
                     ColorPicker("Component Color", selection: $componentColor)
                 }
+                // Font Family Picker
                 Section(header: Text("Font")) {
                     Picker("Font Family", selection: $fontFamily) {
                         Text("Arial").tag("Arial")
@@ -28,12 +33,13 @@ struct SettingsView: View {
                 }
             }
             .navigationBarTitle("Settings", displayMode: .inline)
+            //  Dismiss settings button
             .navigationBarItems(trailing: Button(action: {
                 isPresented.toggle() // Dismiss the settings view
             }) {
                 Text("Done")
             })
         }
-        .navigationViewStyle(StackNavigationViewStyle()) // Ensure compatibility with iPad
+       
     }
 }
